@@ -4,49 +4,73 @@ import java.util.Scanner;
 
 public class Main {
 
+    /*
+     * In order to organize the code and make it more general and easy
+     * to change we need functions. function have name, input parameters, return value
+     * and code.
+     * The variables you declare in the function exist only in its scope example next.
+     */
+
+    /*
+     * Here the function called print, have input parameter of type String called string
+     * and no return type of void (no return value)
+     */
+    public static void print(String string){
+        System.out.println(string);
+    }
+
+    public static void print(int number){
+        System.out.println(number);
+    }
+
+    /*
+     * Here the function called multiply, have 2 input parameters of type int called a and b.
+     * Also, return type of int
+     * the variables a, b exist only in the scope of the function (the curly brackets)
+     */
+    public static int multiply(int a, int b){
+       return a * b;
+    }
+
+    public static void addOneToLocalVarA(int a){
+        a = a + 1;
+    }
+
     public static void main(String[] args) {
+        //Here we call the function print with one parameter
+        print("We are using functions!");
+
+        //Here we call multiply function with a = 5 and b = 2 and assign the return value to mul var.
+        int mul = multiply(5, 2);
 
         /*
-         * We are creating an array of size 5 that hold only integers
-         * Arrays are continuous memory you can invasion them as follows:
-         *         index     0   1   2   3
-         *         array  | 1 | 10 | 4 | 5 |
-         * To change or get a value in the array we need to use the [] operator
-         * Set the value of index 1 in the array (the second member) varName[1] = value
+         * Notice in the next code we declare a in main function (here) and we have a in multiply.
+         * They are different a variable each exist independent of the other one in the scope of its function.
          */
-        int[] intArray = new int[4];
-        intArray[0] = 1;
-        intArray[1] = 10;
-        intArray[2] = 4;
-        intArray[3] = 5;
+        int a = 5;
+        print("Before we call the function addOneToLocalVarA");
+        print(a);
+        print("After we call the function addOneToLocalVarA");
+        print(a);
 
-        System.out.println("1D array:");
-        // Print all the values in the array
-        for(int i=0; i < intArray.length; ++i){
-            System.out.println(intArray[i]);
-        }
+        print("Printing the matrix");
+        char[][] matrix = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
+        printMatrix(matrix);
+    }
 
-        /*
-         * 2D array or array of arrays
-         * int[][] is the type were the first [] is the index of rows and
-         * the second [] is the index of the columns for example
-         * int[][] array2D = new int[3][3]  array with 3 rows and 3 columns
-         * array2D[1][2] the value in the second row(index 1) and the third column(index 2)
-         */
-        int[][] int2DArray = new int[3][3];
-
-        int2DArray[0][0] = 1; int2DArray[0][1] = 2; int2DArray[0][2] = 3;
-        int2DArray[1][0] = 4; int2DArray[1][1] = 5; int2DArray[1][2] = 6;
-        int2DArray[2][0] = 7; int2DArray[2][1] = 8; int2DArray[2][2] = 9;
-
-        System.out.println("\n2D array:");
-        // Print all the values in the 2D array
-        for(int i=0; i < int2DArray.length; i++){
-            for(int j=0; j < int2DArray[0].length; j++) {
-                System.out.print(int2DArray[i][j]+ " ");
-            }
-            System.out.println();
-        }
-
+    /*
+     * This function will print our tic tac tow matrix
+     * if an entry is X or O we print it otherwise we print the index
+     * In the game we will initialize this array first so this function just print
+     * the matrix as a tic tac tow matrix.
+     */
+    public static void printMatrix(char[][] matrix){
+         for(int i=0; i<matrix.length; i++){
+             for(int j=0; j<matrix.length-1; j++){
+                 System.out.print(" " + matrix[i][j] + " |");
+             }
+             System.out.println(" " +matrix[i][matrix.length-1]);
+             System.out.println("------------");
+         }
     }
 }
