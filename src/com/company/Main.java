@@ -4,73 +4,61 @@ import java.util.Scanner;
 
 public class Main {
 
-    /*
-     * In order to organize the code and make it more general and easy
-     * to change we need functions. function have name, input parameters, return value
-     * and code.
-     * The variables you declare in the function exist only in its scope example next.
-     */
-
-    /*
-     * Here the function called print, have input parameter of type String called string
-     * and no return type of void (no return value)
-     */
-    public static void print(String string){
-        System.out.println(string);
-    }
-
-    public static void print(int number){
-        System.out.println(number);
-    }
-
-    /*
-     * Here the function called multiply, have 2 input parameters of type int called a and b.
-     * Also, return type of int
-     * the variables a, b exist only in the scope of the function (the curly brackets)
-     */
-    public static int multiply(int a, int b){
-       return a * b;
-    }
-
-    public static void addOneToLocalVarA(int a){
-        a = a + 1;
-    }
-
     public static void main(String[] args) {
-        //Here we call the function print with one parameter
-        print("We are using functions!");
 
-        //Here we call multiply function with a = 5 and b = 2 and assign the return value to mul var.
-        int mul = multiply(5, 2);
+        //print from 1 to 4 not included
+        printNumberFromToAndBack(1, 4);
 
-        /*
-         * Notice in the next code we declare a in main function (here) and we have a in multiply.
-         * They are different a variable each exist independent of the other one in the scope of its function.
-         */
-        int a = 5;
-        print("Before we call the function addOneToLocalVarA");
-        print(a);
-        print("After we call the function addOneToLocalVarA");
-        print(a);
-
-        print("Printing the matrix");
-        char[][] matrix = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
-        printMatrix(matrix);
+        int[] array = {1,1,1,1,1,100,1,1};
+        System.out.print("we found the ket in " + frogGame(array, 0) + " steps");
     }
 
     /*
-     * This function will print our tic tac tow matrix
-     * if an entry is X or O we print it otherwise we print the index
-     * In the game we will initialize this array first so this function just print
-     * the matrix as a tic tac tow matrix.
+     * This recursive function print the numbers from a given number to a given another number
+     * and print it also backwards
      */
-    public static void printMatrix(char[][] matrix){
-         for(int i=0; i<matrix.length; i++){
-             for(int j=0; j<matrix.length-1; j++){
-                 System.out.print(" " + matrix[i][j] + " |");
-             }
-             System.out.println(" " +matrix[i][matrix.length-1]);
-             System.out.println("------------");
-         }
+    public static void printNumberFromToAndBack(int from, int to){
+        //if we got the the top number we return
+        if(from == to){
+            return;
+        }
+        System.out.println(from);
+
+        //recursive call while we increment the from to print it.
+        printNumberFromToAndBack(from+1, to);
+
+        //after the recursive call we print the from again, this line is the backwards printing
+        System.out.println(from);
     }
+
+    /*
+     * More easy version of what we explained in the video
+     * Each time the frog can leap one or three steps. Therefore
+     * the maximum number of steps are all one (the array length - 1)
+     */
+    public static int frogGame(int[] array, int location){
+        // if we didnt find the key(number 100) if want to return large number, bigger
+        // than the maximum number of steps therefore we return the array length.
+        if(array.length <= location){
+            return array.length;
+        }
+
+        // we found the key then we return 0
+        if(array[location] == 100){
+            return 0;
+        } else {
+            //calculate the number of steps it will take if we were in the +1 and +3 location
+            // and add 1 to add the jump
+            int oneStep = 1 + frogGame(array, location + 1);
+            int threeStep = 1 + frogGame(array, location + 3);
+
+            //find the minimum between those two
+            if(oneStep < threeStep){
+                return oneStep;
+            } else {
+                return threeStep;
+            }
+        }
+    }
+
 }
