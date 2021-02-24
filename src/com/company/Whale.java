@@ -6,13 +6,14 @@ public class Whale {
      * There are 3 keywords which define the field/method visibility:
      *  Public: The field/method can be accessed from outside (with the object reference).
      *  Private: The field/method can't be accessed from outside.
-     *  Protected: We will cover this in a later video.
+     *  Protected: Visible to the classes in the package and to the classes that extend this class.
      */
 
     //The fields/properties of the class
-    private int length;
+    protected int length;
     public String type;
     public double weight;
+    protected int age;
 
     //The constructor of the class
     public Whale(int length, String type, double weight){
@@ -80,4 +81,5 @@ public class Whale {
                 ", weight=" + weight +
                 '}';
     }
+
 }
